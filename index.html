@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrono de la Liberté (Paternité)</title>
+    <style>
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #4ecdc4;
+            --bg: #f7f9fc;
+            --text: #2d3436;
+            --tear-color: #a2d2ff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            overflow: hidden; /* Empêche le scroll à cause des larmes */
+        }
+
+        /* Animation des larmes */
+        .tear {
+            position: absolute;
+            top: -20px;
+            color: var(--tear-color);
+            font-size: 20px;
+            user-select: none;
+            z-index: 0;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh);
+            }
+        }
+
+        .container {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 5px solid var(--secondary);
+            max-width: 600px;
+            position: relative;
+            z-index: 10; /* Pour rester au dessus des larmes */
+        }
+
+        h1 { color: var(--primary); margin-bottom: 0.5rem; }
+        p.subtitle { font-style: italic; color: #636e72; margin-bottom: 2rem; }
+
+        .countdown {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .time-box {
+            background: var(--bg);
+            padding: 15px;
+            border-radius: 12px;
+            min-width: 80px;
+        }
+
+        .number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+
+        .label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .message-fun {
+            margin-top: 2rem;
+            font-weight: bold;
+            padding: 1rem;
+            border-top: 2px dashed #ddd;
+        }
+
+        .emoji { font-size: 2.5rem; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="emoji">🍼 🏃💨</div>
+        <h1>Opération "Binôme en Solo"</h1>
+        <p class="subtitle">Temps restant avant mon abandon de poste pour couches-culottes :</p>
+
+        <div class="countdown" id="timer">
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">Jours</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">Heures</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">Mins</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">Secs</span>
+            </div>
+        </div>
+
+        <div class="message-fun" id="humor-msg">
+            Prépare tes dossiers, je sens déjà l'odeur du talc !
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const dateDepart = new Date(2026, 3, 30, 17, 0, 0).getTime(); 
+
+        const messages = [
+            "Prépare les mouchoirs, l'échéance approche...",
+            "T'as pensé à noter tous mes mots de passe ?",
+            "Bientôt, mon seul collègue fera 50cm.",
+            "J'espère que tu aimes le café en tête-à-tête avec toi-même.",
+            "Dernière ligne droite avant l'indépendance !",
+            "Ne pleure pas (trop), je reviendrai... un jour."
+        ];
+
+        // --- GESTION DU COMPTE À REBOURS ---
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = dateDepart - now;
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = d;
+            document.getElementById("hours").innerText = h;
+            document.getElementById("minutes").innerText = m;
+            document.getElementById("seconds").innerText = s;
+
+            if (distance < 0) {
+                document.querySelector(".container").innerHTML = "<h1>CIAO ! 🍼</h1><p>Je suis officiellement en train de changer une couche. Bon courage pour les mails !</p>";
+            }
+        }
+
+        // --- CRÉATION DES LARMES ---
+        function createTear() {
+            const tear = document.createElement('div');
+            tear.classList.add('tear');
+            tear.innerText = '💧';
+            tear.style.left = Math.random() * 100 + 'vw';
+            tear.style.animationDuration = Math.random() * 2 + 3 + 's'; // Entre 3s et 5s
+            tear.style.opacity = Math.random();
+            
+            document.body.appendChild(tear);
+
+            // Supprimer la larme après l'animation
+            setTimeout(() => {
+                tear.remove();
+            }, 5000);
+        }
+
+        // Générer des larmes régulièrement
+        setInterval(createTear, 300);
+
+        // Change le message d'humour
+        setInterval(() => {
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById("humor-msg").innerText = randomMsg;
+        }, 8000);
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
