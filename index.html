@@ -3,105 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chrono de la Liberté (Paternité)</title>
+    <title>Bye Bye Binôme ! 🍼</title>
     <style>
         :root {
             --primary: #ff6b6b;
             --secondary: #4ecdc4;
-            --bg: #f7f9fc;
+            --accent: #ffeaa7;
+            --bg: #f0f3f7;
             --text: #2d3436;
-            --tear-color: #a2d2ff;
         }
+
+        * { box-sizing: border-box; }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--bg);
             color: var(--text);
+            margin: 0;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-            overflow: hidden; /* Empêche le scroll à cause des larmes */
+            overflow: hidden;
+            padding: 20px;
         }
 
-        /* Animation des larmes */
+        /* Animation des larmes en arrière-plan */
         .tear {
             position: absolute;
-            top: -20px;
-            color: var(--tear-color);
-            font-size: 20px;
+            top: -50px;
+            font-size: 24px;
+            z-index: 1;
             user-select: none;
-            z-index: 0;
-            animation: fall linear infinite;
+            animation: fall linear forwards;
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(105vh);
-            }
+            to { transform: translateY(110vh) rotate(360deg); }
         }
 
-        .container {
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border: 5px solid var(--secondary);
-            max-width: 600px;
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 2.5rem;
+            border-radius: 30px;
+            box-shadow: 20px 20px 60px #d1d9e6, -20px -20px 60px #ffffff;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
             position: relative;
-            z-index: 10; /* Pour rester au dessus des larmes */
+            z-index: 10;
+            border: 2px solid white;
         }
 
-        h1 { color: var(--primary); margin-bottom: 0.5rem; }
-        p.subtitle { font-style: italic; color: #636e72; margin-bottom: 2rem; }
+        .emoji-main { font-size: 4rem; margin-bottom: 1rem; display: block; }
+        
+        h1 { 
+            color: var(--primary); 
+            font-size: 1.8rem; 
+            margin: 0 0 10px 0;
+            line-height: 1.2;
+        }
+
+        p.subtitle { 
+            font-size: 0.9rem; 
+            color: #636e72; 
+            margin-bottom: 2rem;
+        }
 
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
+            gap: 10px;
+            margin-bottom: 2rem;
         }
 
         .time-box {
-            background: var(--bg);
-            padding: 15px;
-            border-radius: 12px;
-            min-width: 80px;
+            background: white;
+            padding: 15px 5px;
+            border-radius: 15px;
+            box-shadow: inset 4px 4px 8px #d1d9e6, inset -4px -4px 8px #ffffff;
         }
 
         .number {
             display: block;
-            font-size: 2.5rem;
-            font-weight: bold;
+            font-size: 1.8rem;
+            font-weight: 800;
             color: var(--secondary);
         }
 
         .label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .message-fun {
-            margin-top: 2rem;
+            font-size: 0.65rem;
             font-weight: bold;
-            padding: 1rem;
-            border-top: 2px dashed #ddd;
+            text-transform: uppercase;
+            color: #b2bec3;
         }
 
-        .emoji { font-size: 2.5rem; margin-bottom: 10px; }
+        .message-box {
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--primary);
+            border-top: 1px solid #eee;
+            margin-top: 1rem;
+            padding-top: 1rem;
+        }
+
+        .panic-btn {
+            margin-top: 1.5rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .panic-btn:hover {
+            transform: scale(1.05);
+            background: #ff5252;
+        }
+
+        /* Responsive - Tablette & Mobile */
+        @media (max-width: 480px) {
+            .countdown {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .card {
+                padding: 1.5rem;
+            }
+            h1 { font-size: 1.5rem; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="emoji">🍼 🏃💨</div>
-        <h1>Opération "Binôme en Solo"</h1>
-        <p class="subtitle">Temps restant avant mon abandon de poste pour couches-culottes :</p>
+    <div class="card">
+        <span class="emoji-main">🏃‍♂️💨🍼</span>
+        <h1>Opération <br> Abandon de Poste</h1>
+        <p class="subtitle">Temps restant avant que tu ne deviennes la seule maîtresse à bord :</p>
 
-        <div class="countdown" id="timer">
+        <div class="countdown">
             <div class="time-box">
                 <span class="number" id="days">00</span>
                 <span class="label">Jours</span>
@@ -120,9 +168,11 @@
             </div>
         </div>
 
-        <div class="message-fun" id="humor-msg">
-            Prépare tes dossiers, je sens déjà l'odeur du talc !
+        <div class="message-box" id="humor-msg">
+            Prépare les mouchoirs, l'échéance approche...
         </div>
+
+        <button class="panic-btn" onclick="triggerPanic()">Bouton SOS PANIQUE</button>
     </div>
 
     <script>
@@ -130,15 +180,14 @@
         const dateDepart = new Date(2026, 3, 30, 17, 0, 0).getTime(); 
 
         const messages = [
-            "Prépare les mouchoirs, l'échéance approche...",
+            "Respire... ça va bien se passer (ou pas).",
             "T'as pensé à noter tous mes mots de passe ?",
-            "Bientôt, mon seul collègue fera 50cm.",
-            "J'espère que tu aimes le café en tête-à-tête avec toi-même.",
-            "Dernière ligne droite avant l'indépendance !",
-            "Ne pleure pas (trop), je reviendrai... un jour."
+            "Bientôt, mon seul collègue criera plus fort que toi.",
+            "Je t'enverrai des photos de couches pour te motiver !",
+            "Prépare ton café en double, tu vas en avoir besoin.",
+            "Si tu pleures sur le clavier, ça fait court-circuit."
         ];
 
-        // --- GESTION DU COMPTE À REBOURS ---
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = dateDepart - now;
@@ -148,41 +197,39 @@
             const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById("days").innerText = d;
-            document.getElementById("hours").innerText = h;
-            document.getElementById("minutes").innerText = m;
-            document.getElementById("seconds").innerText = s;
+            document.getElementById("days").innerText = d.toString().padStart(2, '0');
+            document.getElementById("hours").innerText = h.toString().padStart(2, '0');
+            document.getElementById("minutes").innerText = m.toString().padStart(2, '0');
+            document.getElementById("seconds").innerText = s.toString().padStart(2, '0');
 
             if (distance < 0) {
-                document.querySelector(".container").innerHTML = "<h1>CIAO ! 🍼</h1><p>Je suis officiellement en train de changer une couche. Bon courage pour les mails !</p>";
+                document.body.innerHTML = "<div class='card'><h1>LIBÉRÉ ! 🍼</h1><p>Je suis officiellement en congé. Bisous, bon courage avec les mails !</p></div>";
             }
         }
 
-        // --- CRÉATION DES LARMES ---
         function createTear() {
             const tear = document.createElement('div');
             tear.classList.add('tear');
-            tear.innerText = '💧';
+            const icons = ['💧', '😢', '😭', '💧'];
+            tear.innerText = icons[Math.floor(Math.random() * icons.length)];
             tear.style.left = Math.random() * 100 + 'vw';
-            tear.style.animationDuration = Math.random() * 2 + 3 + 's'; // Entre 3s et 5s
-            tear.style.opacity = Math.random();
-            
+            tear.style.animationDuration = Math.random() * 2 + 2 + 's';
+            tear.style.opacity = Math.random() * 0.7;
             document.body.appendChild(tear);
-
-            // Supprimer la larme après l'animation
-            setTimeout(() => {
-                tear.remove();
-            }, 5000);
+            setTimeout(() => tear.remove(), 4000);
         }
 
-        // Générer des larmes régulièrement
-        setInterval(createTear, 300);
+        function triggerPanic() {
+            alert("⚠️ ALERTE PANIQUE ⚠️\n\nRespire un grand coup ! \nIl reste encore un peu de temps pour me soutirer mes secrets de travail contre des chocolats.");
+            // Bonus : plein de larmes d'un coup
+            for(let i=0; i<20; i++) setTimeout(createTear, i*50);
+        }
 
-        // Change le message d'humour
+        setInterval(createTear, 400);
         setInterval(() => {
-            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
-            document.getElementById("humor-msg").innerText = randomMsg;
-        }, 8000);
+            const msg = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById("humor-msg").innerText = msg;
+        }, 6000);
 
         setInterval(updateCountdown, 1000);
         updateCountdown();
